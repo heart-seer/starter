@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.studentmanager.mapper.ScoreMapper">
+    <select id="selectByStudentAndCourse" resultType="com.example.studentmanager.model.entity.ScoreEntity">
+        SELECT
+            id AS scoreId,
+            student_id AS studentId,
+            course_id AS courseId,
+            score
+        FROM student_course
+        WHERE student_id = #{studentId} AND course_id = #{courseId}
+    </select>
+
+    <select id="selectByStudentId" resultType="com.example.studentmanager.model.entity.ScoreEntity">
+        SELECT
+            id AS scoreId,
+            student_id AS studentId,
+            course_id AS courseId,
+            score
+        FROM student_course
+        WHERE student_id = #{studentId}
+    </select>
+
+    <select id="selectByCourseId" resultType="com.example.studentmanager.model.entity.ScoreEntity">
+        SELECT
+            id AS scoreId,
+            student_id AS studentId,
+            course_id AS courseId,
+            score
+        FROM student_course
+        WHERE course_id = #{courseId}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO student_course (student_id, course_id, score)
+        VALUES (#{studentId}, #{courseId}, #{score})
+    </insert>
+
+    <update id="update">
+        UPDATE student_course
+        SET score = #{score}
+        WHERE student_id = #{studentId} AND course_id = #{courseId}
+    </update>
+
+    <delete id="deleteByStudentAndCourse">
+        DELETE FROM student_course
+        WHERE student_id = #{studentId} AND course_id = #{courseId}
+    </delete>
+    <delete id="deleteByStudentId">
+        DELETE FROM student_course WHERE student_id = #{studentId}
+    </delete>
+</mapper>
